@@ -86,11 +86,12 @@ class Writer
 	 */
 	public function getImage()
 	{
+		$png = new Generator\Png();
 		$wavTmp = Convert::getWavFile($this->getFileName());
 
 		if ($wavTmp) {
 			$waveform = Waveform::fromFilename($wavTmp);
-			$waveform->setGenerator(new Generator\Png)
+			$waveform->setGenerator($png)
 				->setWidth($this->getWidth())
 				->setHeight($this->getHeight());
 
@@ -109,12 +110,13 @@ class Writer
 	 */
 	public function saveImage($saveAs)
 	{
+		$png = new Generator\Png();
+		$png->setUseHeader(false)
+			->setFilename($saveAs);
+
 		$wavTmp = Convert::getWavFile($this->getFileName());
 
 		if ($wavTmp) {
-			$png = new Generator\Png();
-			$png->setUseHeader(false)
-				->setFilename($saveAs);
 
 			$waveform = Waveform::fromFilename($wavTmp);
 			unlink($wavTmp);
