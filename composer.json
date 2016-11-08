@@ -1,0 +1,19 @@
+{
+    "name": "sijeko/waveform",
+    "authors": [
+        {
+            "name": "alexdeg",
+            "email": "kikkikkik@bk.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+      "php": ">=5.3.0",
+      "boyhagemann/waveform": "dev-master"
+    },
+    "autoload": {
+      "psr-4": {
+        "Sijeko\\": "src/"
+      }
+    }
+}
