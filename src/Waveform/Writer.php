@@ -5,6 +5,7 @@ namespace Sijeko\Waveform;
 
 use BoyHagemann\Waveform\Waveform;
 use BoyHagemann\Waveform\Generator;
+use Sijeko\Exceptions\BaseError;
 
 /**
  * Класс для получения изображения по айдиофайлу
@@ -103,9 +104,27 @@ class Writer
 	/**
 	 * Сохраняет изображение по адресу
 	 * @param string $saveAs
+	 * @return bool
+	 * @throws BaseError
 	 */
 	public function saveImage($saveAs)
 	{
+		$wavTmp = Convert::getWavFile($this->getFileName());
+
+		if ($wavTmp) {
+			$png = new Generator\Png();
+			$png->setUseHeader(false)
+				->setFilename($saveAs);
+
+			$waveform = Waveform::fromFilename($wavTmp);
+			unlink($wavTmp);
+			$waveform->setGenerator($png)
+				->setWidth($this->getWidth())
+				->setHeight($this->getHeight())
+				->generate();
+			return true;
+		}
+		throw new BaseError('Can\'t get wav-file from `' . $this->getFileName() . '`');
 
 	}
 
