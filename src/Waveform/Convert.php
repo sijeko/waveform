@@ -12,6 +12,7 @@ class Convert
 	public static $availableTypes = [
 		'audio/mpeg',
 		'audio/ogg',
+		'audio/x-wav',
 		];
 
 	/**
