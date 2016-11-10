@@ -22,6 +22,26 @@ class Writer
 	private $width = 960;
 	/** @var int Высота конечного изображения */
 	private $height = 400;
+	/** @var bool Растягивает получаемое изображение по высоте $height */
+	private $maximize = true;
+
+	/**
+	 * @return boolean
+	 */
+	public function getMaximize()
+	{
+		return $this->maximize;
+	}
+
+	/**
+	 * @param boolean $maximize
+	 * @return $this
+	 */
+	public function setMaximize($maximize)
+	{
+		$this->maximize = $maximize;
+		return $this;
+	}
 
 	/**
 	 * Writer constructor.
@@ -92,6 +112,7 @@ class Writer
 		if ($wavTmp) {
 			$waveform = Waveform::fromFilename($wavTmp);
 			$waveform->setGenerator($png)
+				->setMaximized($this->getMaximize())
 				->setWidth($this->getWidth())
 				->setHeight($this->getHeight());
 
@@ -121,6 +142,7 @@ class Writer
 			$waveform = Waveform::fromFilename($wavTmp);
 			unlink($wavTmp);
 			$waveform->setGenerator($png)
+				->setMaximized($this->getMaximize())
 				->setWidth($this->getWidth())
 				->setHeight($this->getHeight())
 				->generate();
