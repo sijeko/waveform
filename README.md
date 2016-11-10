@@ -6,6 +6,8 @@ This project is based on [boyhagemann Waveform](https://github.com/boyhagemann/W
 Usage
 -----
 
+You must have installed [ffmpeg](http://ffmpeg.org/)
+
 Create an object from Writer class with path to music as parameter
 
 ```php
