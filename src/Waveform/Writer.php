@@ -14,7 +14,7 @@ use Sijeko\Exceptions\BaseError;
  *
  * @package Sijeko\Waveform
  */
-class Writer
+class Writer extends Convert
 {
 	/** @var null|string Путь к изображению */
 	private $fileName = null;
@@ -107,7 +107,7 @@ class Writer
 	public function getImage()
 	{
 		$png = new Generator\Png();
-		$wavTmp = Convert::getWavFile($this->getFileName());
+		$wavTmp = $this->getTemporaryWavFile($this->getFileName());
 
 		if ($wavTmp) {
 			$waveform = Waveform::fromFilename($wavTmp);
@@ -135,7 +135,7 @@ class Writer
 		$png->setUseHeader(false)
 			->setFilename($saveAs);
 
-		$wavTmp = Convert::getWavFile($this->getFileName());
+		$wavTmp = $this->getTemporaryWavFile($this->getFileName());
 
 		if ($wavTmp) {
 
